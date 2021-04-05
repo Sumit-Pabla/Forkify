@@ -2,9 +2,10 @@
   "name": "forkify",
   "version": "1.0.0",
   "description": "Recipe application",
-  "main": "index.js",
+  "main": "index.html",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "parcel index.html",
+    "build": "parcel buuld index.html"
   },
   "repository": {
     "type": "git",
@@ -15,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/Sumit-Pabla/Forkify/issues"
   },
-  "homepage": "https://github.com/Sumit-Pabla/Forkify#readme"
+  "homepage": "https://github.com/Sumit-Pabla/Forkify#readme",
+  "devDependencies": {
+    "parcel": "^2.0.0-beta.2"
+  }
 }
