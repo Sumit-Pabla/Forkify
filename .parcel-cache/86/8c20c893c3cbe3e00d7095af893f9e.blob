@@ -3859,7 +3859,7 @@ const loadRecipe = async function (id) {
     //})
     //console.log(state.recipe)
   } catch (err) {
-    console.error(`${err} !!!!!`);
+    console.log(err);
   }
 };
 
@@ -4635,11 +4635,8 @@ const getJSON = async function (url) {
   try {
     const res = await fetch(url);
     const data = await res.json();
-    if (!res.ok) throw new Error(`${data.message} (${res.status})`);
-    return data;
-  } catch (err) {
-    throw err;
-  }
+    if (!res.ok) throw new Error(`${data.message} (${res.status})`); //return data
+  } catch (err) {}
 };
 
 exports.getJSON = getJSON;
