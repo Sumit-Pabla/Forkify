@@ -4642,12 +4642,10 @@ var _clear = new WeakSet();
 
 var _generateMarkup = new WeakSet();
 
-var _generateMarkupIngredient = new WeakSet();
+var _generate = new WeakMap();
 
 class RecipeView {
   constructor() {
-    _generateMarkupIngredient.add(this);
-
     _generateMarkup.add(this);
 
     _clear.add(this);
@@ -4671,6 +4669,11 @@ class RecipeView {
       _classPrivateFieldGet(this, _parentElement).innerHTML = '';
 
       _classPrivateFieldGet(this, _parentElement).insertAdjacentHTML('afterbegin', markup);
+    });
+
+    _generate.set(this, {
+      writable: true,
+      value: void 0
     });
   }
 
@@ -4743,7 +4746,7 @@ function _generateMarkup2() {
           <div class="recipe__ingredients">
             <h2 class="heading--2">Recipe ingredients</h2>
             <ul class="recipe__ingredient-list">
-              ${_classPrivateFieldGet(this, _data).ingredients.map(_classPrivateMethodGet(this, _generateMarkupIngredient, _generateMarkupIngredient2)).join('')}
+              ${_classPrivateFieldGet(this, _data).ingredients.map().join('')}
             
             
   
@@ -4778,21 +4781,6 @@ function _generateMarkup2() {
               </svg>
             </a>
           </div>`;
-}
-
-function _generateMarkupIngredient2(ing) {
-  return `
-            <li class="recipe__ingredient">
-            <svg class="recipe__icon">
-              <use href="${_icons.default}#icon-check"></use>
-            </svg>
-            <div class="recipe__quantity">${ing.quantity ? new _fractional.Fraction(ing.quantity).toString() : ""}</div>
-            <div class="recipe__description">
-              <span class="recipe__unit">${ing.unit}</span>
-              ${ing.description}
-            </div>
-          </li>
-            `;
 }
 
 var _default = new RecipeView();
