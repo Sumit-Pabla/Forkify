@@ -535,7 +535,7 @@ const controlAddBookmark = function () {
 };
 
 const controlBookmarks = function () {
-  _bookmarksView.default.render(model.state.bookmarks);
+  _bookmarksView.default.render(model.state);
 };
 
 const init = () => {

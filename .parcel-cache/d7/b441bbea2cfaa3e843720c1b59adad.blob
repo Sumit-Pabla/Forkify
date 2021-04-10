@@ -535,12 +535,10 @@ const controlAddBookmark = function () {
 };
 
 const controlBookmarks = function () {
-  _bookmarksView.default.render(model.state.bookmarks);
+  _bookmarksView.default.render;
 };
 
 const init = () => {
-  _bookmarksView.default.addHandlerRender(controlBookmarks);
-
   _recipeView.default.addHandlerRender(controlRecipes);
 
   _recipeView.default.addHandlerUpdateServings(controlServings);

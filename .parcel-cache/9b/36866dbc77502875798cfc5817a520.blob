@@ -534,13 +534,7 @@ const controlAddBookmark = function () {
   _bookmarksView.default.render(model.state.bookmarks);
 };
 
-const controlBookmarks = function () {
-  _bookmarksView.default.render(model.state.bookmarks);
-};
-
 const init = () => {
-  _bookmarksView.default.addHandlerRender(controlBookmarks);
-
   _recipeView.default.addHandlerRender(controlRecipes);
 
   _recipeView.default.addHandlerUpdateServings(controlServings);
@@ -4003,13 +3997,6 @@ const deleteBookmark = function (id) {
 };
 
 exports.deleteBookmark = deleteBookmark;
-
-const init = function () {
-  const storage = localStorage.getItem('bookmarks');
-  if (storage) state.bookmarks = JSON.parse(storage);
-};
-
-init();
 },{"regenerator-runtime":"e155e0d3930b156f86c48e8d05522b16","./config.js":"09212d541c5c40ff2bd93475a904f8de","./helpers.js":"0e8dcd8a4e1c61cf18f78e1c2563655d"}],"e155e0d3930b156f86c48e8d05522b16":[function(require,module,exports) {
 /**
  * Copyright (c) 2014-present, Facebook, Inc.
@@ -33575,10 +33562,6 @@ class bookmarksView extends _View.default {
     _defineProperty(this, "_message", '');
 
     _defineProperty(this, "_parentElement", document.querySelector('.bookmarks__list'));
-  }
-
-  addHandlerRender(handler) {
-    window.addEventListener('load', handler);
   }
 
   _generateMarkup() {
