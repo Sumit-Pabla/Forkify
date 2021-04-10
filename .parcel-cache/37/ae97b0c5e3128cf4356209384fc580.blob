@@ -479,6 +479,8 @@ const controlRecipes = async () => {
     await model.loadRecipe(id);
 
     _recipeView.default.render(model.state.recipe);
+
+    controlServings();
   } catch (err) {
     console.log(err);
 
@@ -514,8 +516,8 @@ const controlPagination = function (goToPage) {
   console.log('Pag controller');
 };
 
-const controlServings = function (newServings) {
-  model.updateServings(newServings);
+const controlServings = function () {
+  model.updateServings(10);
 
   _recipeView.default.render(model.state.recipe);
 };
@@ -4794,13 +4796,8 @@ class RecipeView extends _View.default {
 
   addHandlerUpdateServings(handler) {
     this._parentElement.addEventListener('click', function (e) {
-      const btn = e.target.closest('.btn--update-servings');
-      if (!btn) return;
-      const {
-        updateTo
-      } = btn.dataset;
-      console.log(updateTo);
-      if (updateTo > 0) handler(+updateTo);
+      const btn = e.target.closest('.btn--tiny');
+      handler();
     });
   }
 
@@ -4829,12 +4826,12 @@ class RecipeView extends _View.default {
               <span class="recipe__info-text">servings</span>
   
               <div class="recipe__info-buttons">
-                <button class="btn--tiny btn--update-servings" data-update-to="${this._data.servings - 1}">
+                <button class="btn--tiny btn--increase-servings">
                   <svg>
                     <use href="${_icons.default}#icon-minus-circle"></use>
                   </svg>
                 </button>
-                <button class="btn--tiny btn--update-servings" data-update-to="${this._data.servings + 1}">
+                <button class="btn--tiny btn--increase-servings">
                   <svg>
                     <use href="${_icons.default}#icon-plus-circle"></use>
                   </svg>
