@@ -47,7 +47,8 @@ try{
  } 
 
  const controlPagination = function(goToPage) {
-  resultsView.render(goToPage) 
+  resultsView.render(model.getSearchResultsPage(goToPage))
+  paginationView.render(model.state.search)
   console.log('Pag controller')
  }
 

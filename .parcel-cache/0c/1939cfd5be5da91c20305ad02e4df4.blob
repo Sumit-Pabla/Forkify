@@ -497,7 +497,7 @@ const controlSearchResults = async function () {
     await model.loadSearchResults(query);
     console.log(model.state.search.results);
 
-    _resultsView.default.render(model.getSearchResultsPage(1)); //Render Pagination
+    _resultsView.default.render(model.getSearchResultsPage(2)); //Render Pagination
 
 
     _paginationView.default.render(model.state.search);
@@ -508,8 +508,6 @@ const controlSearchResults = async function () {
 
 const controlPagination = function (goToPage) {
   _resultsView.default.render(model.getSearchResultsPage(goToPage));
-
-  _paginationView.default.render(model.state.search);
 
   console.log('Pag controller');
 };
