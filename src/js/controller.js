@@ -61,10 +61,17 @@ try{
 
   };
 
+const controlAddBookmark = function() {
+  if(!model.state.recipe.bookmarked) model.addBookmark(model.state.recipe);
+  else model.deleteBookmark(model.state.recipe.id);
 
+  //model.addBookmark(model.state.recipe)
+  recipeView.update(model.state.recipe)
+}
 const init = () => {
 recipeView.addHandlerRender(controlRecipes);
 recipeView.addHandlerUpdateServings(controlServings)
+recipeView.addHandlerAddBookmark(controlAddBookmark)
 searchView.addHandlerSearch(controlSearchResults)
 paginationView.addHandlerClick(controlPagination)
 
