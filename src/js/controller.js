@@ -19,8 +19,11 @@ try{
   const id = window.location.hash.slice(1);
   if(!id) return;
   recipeView.renderSpinner();
+
   await model.loadRecipe(id);
   recipeView.render(model.state.recipe);
+  resultsView.update(model.getSearchResultsPage())
+
 
 }catch (err) {
   console.log(err);
@@ -49,12 +52,13 @@ try{
  const controlPagination = function(goToPage) {
   resultsView.render(model.getSearchResultsPage(goToPage))
   paginationView.render(model.state.search)
-  console.log('Pag controller')
  }
  
  const controlServings = function (newServings) {
   model.updateServings(newServings)
-  recipeView.render(model.state.recipe)
+  //recipeView.render(model.state.recipe)
+  recipeView.update(model.state.recipe)
+
   };
 
 
