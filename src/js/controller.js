@@ -46,10 +46,15 @@ try{
    }
  } 
 
+ const controlPagination = function(goToPage) {
+  resultsView.render(goToPage) 
+  console.log('Pag controller')
+ }
 
 const init = () => {
 recipeView.addHandlerRender(controlRecipes);
 searchView.addHandlerSearch(controlSearchResults)
+paginationView.addHandlerClick(controlPagination)
 
 };
 

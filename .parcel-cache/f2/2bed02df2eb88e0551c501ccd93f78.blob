@@ -506,9 +506,7 @@ const controlSearchResults = async function () {
   }
 };
 
-const controlPagination = function (goToPage) {
-  _resultsView.default.render(goToPage);
-
+const controlPagination = function () {
   console.log('Pag controller');
 };
 
@@ -33346,8 +33344,8 @@ class paginationView extends _View.default {
     this._parentElement.addEventListener('click', function (e) {
       const btn = e.target.closest('.btn--inline');
       if (!btn) return;
+      handler();
       const goToPage = +btn.dataset.goto;
-      handler(goToPage);
     });
   }
 

@@ -506,9 +506,7 @@ const controlSearchResults = async function () {
   }
 };
 
-const controlPagination = function (goToPage) {
-  _resultsView.default.render(goToPage);
-
+const controlPagination = function () {
   console.log('Pag controller');
 };
 
