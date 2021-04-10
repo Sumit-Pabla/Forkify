@@ -2,10 +2,10 @@ import icons from 'url:../../img/icons.svg'
 import previewView from './previewView'
 import View from './View'
 
-class ResultsView extends View {
-    _errorMessage = 'No recipes found for your query. Please try again!';
+class bookmarksView extends View {
+    _errorMessage = 'No bookmarks yet. Find a nice recipe and bookmark it :)';
     _message = '';
-    _parentElement = document.querySelector('.results');
+    _parentElement = document.querySelector('.bookmarks__list');
 
 
 
@@ -15,7 +15,7 @@ class ResultsView extends View {
             previewView.render(result,false))
             .join('');
 
-    }
+    }  
 }
 
-export default new ResultsView();
+export default new bookmarksView();
