@@ -3968,7 +3968,7 @@ const createRecipeObject = function (data) {
 
 const loadRecipe = async function (id) {
   try {
-    const data = await (0, _helpers.AJAX)(`${_config.API_URL}${id}?key=${_config.KEY}`);
+    const data = await (0, _helpers.getJSON)(`${_config.API_URL}${id}`);
     state.recipe = createRecipeObject(data);
     if (state.bookmarks.some(bookmark => bookmark.id === id)) state.recipe.bookmarked = true;else state.recipe.bookmarked = false;
   } catch (err) {
@@ -3982,7 +3982,7 @@ exports.loadRecipe = loadRecipe;
 const loadSearchResults = async function (query) {
   try {
     state.search.query = query;
-    const data = await (0, _helpers.AJAX)(`${_config.API_URL}?search=${query}&key=${_config.KEY}`);
+    const data = await (0, _helpers.getJSON)(`${_config.API_URL}?search=${query}`);
     console.log(data);
     state.search.results = data.data.recipes.map(recipe => {
       return {
@@ -3990,10 +3990,7 @@ const loadSearchResults = async function (query) {
         title: recipe.title,
         publisher: recipe.publisher,
         sourceUrl: recipe.source_url,
-        image: recipe.image_url,
-        ...(recipe.key && {
-          key: recipe.key
-        })
+        image: recipe.image_url
       };
     });
     state.search.page = 1; //console.log(state.search.results)
@@ -4057,8 +4054,7 @@ const clearBookmarks = function () {
 const uploadRecipe = async function (newRecipe) {
   try {
     const ingredients = Object.entries(newRecipe).filter(entry => entry[0].startsWith('ingredient') && entry[1] !== '').map(ing => {
-      const ingArr = ing[1].split(',').map(el => el.trim()); //const ingArr = ing[1].replaceAll(' ', '').split(',')
-
+      const ingArr = ing[1].replaceAll(' ', '').split(',');
       if (ingArr.length !== 3) throw new Error('Wrong ingredient format! Please use correct format');
       const [quantity, unit, description] = ingArr;
       return {
@@ -4076,7 +4072,7 @@ const uploadRecipe = async function (newRecipe) {
       servings: +newRecipe.servings,
       ingredients
     };
-    const data = await (0, _helpers.AJAX)(`${_config.API_URL}?key=${_config.KEY}`, recipe);
+    const data = await (0, _helpers.sendJSON)(`${_config.API_URL}?key=${_config.KEY}`, recipe);
     state.recipe = createRecipeObject(data);
     addBookmark(state.recipe);
   } catch (err) {
@@ -5017,11 +5013,9 @@ class RecipeView extends _View.default {
               </div>
             </div>
   
-            <div class="recipe__user-generated ${this._data.key ? '' : 'hidden'}">
-            <svg>
-              <use href="${_icons.default}#icon-user"></use>
-            </svg>
-          </div>
+            <div class="recipe__user-generated">
+              
+            </div>
             
             <button class="btn--round btn--bookmark">
               <svg class="">
@@ -23827,12 +23821,7 @@ class previewView extends _View.default {
               <div class="preview__data">
                 <h4 class="preview__title">${this._data.title}</h4>
                 <p class="preview__publisher">${this._data.publisher}</p>
-                <div class="preview__user-generated ${this._data.key ? '' : 'hidden'}">
-                <svg>
-                <use href="${_icons.default}#icon-user"></use>
-                </svg>
-                </div>
-            </div>
+              </div>
             </a>
           </li>
         
