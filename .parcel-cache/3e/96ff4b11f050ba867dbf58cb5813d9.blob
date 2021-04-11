@@ -457,8 +457,6 @@ var _paginationView = _interopRequireDefault(require("./views/paginationView"));
 
 var _bookmarksView = _interopRequireDefault(require("./views/bookmarksView"));
 
-var _addRecipeView = _interopRequireDefault(require("./views/addRecipeView"));
-
 var _lodash = require("lodash");
 
 var _csso = require("csso");
@@ -540,10 +538,6 @@ const controlBookmarks = function () {
   _bookmarksView.default.render(model.state.bookmarks);
 };
 
-const controlAddRecipe = function (newRecipe) {
-  console.log(newRecipe);
-};
-
 const init = () => {
   _bookmarksView.default.addHandlerRender(controlBookmarks);
 
@@ -555,13 +549,11 @@ const init = () => {
 
   _searchView.default.addHandlerSearch(controlSearchResults);
 
-  _addRecipeView.default.addHandlerUpload(controlAddRecipe);
-
   _paginationView.default.addHandlerClick(controlPagination);
 };
 
 init();
-},{"core-js/modules/web.immediate.js":"140df4f8e97a45c53c66fead1f5a9e92","core-js/modules/web.url.js":"a66c25e402880ea6b966ee8ece30b6df","core-js/modules/web.url.to-json.js":"6357c5a053a36e38c0e24243e550dd86","core-js/modules/web.url-search-params.js":"2494aebefd4ca447de0ef4cfdd47509e","./model.js":"aabf248f40f7693ef84a0cb99f385d1f","./views/recipeView":"bcae1aced0301b01ccacb3e6f7dfede8","lodash":"5b51af4f8ee9a053df33d524040c62ef","./views/searchView":"c5d792f7cac03ef65de30cc0fbb2cae7","./views/resultsView":"eacdbc0d50ee3d2819f3ee59366c2773","csso":"11e574ef63497f66b35e33ba2858aa6a","./views/paginationView":"d2063f3e7de2e4cdacfcb5eb6479db05","./views/bookmarksView":"7ed9311e216aa789713f70ebeec3ed40","./views/addRecipeView":"4dd83c2a08c1751220d223c54dc70016"}],"140df4f8e97a45c53c66fead1f5a9e92":[function(require,module,exports) {
+},{"core-js/modules/web.immediate.js":"140df4f8e97a45c53c66fead1f5a9e92","core-js/modules/web.url.js":"a66c25e402880ea6b966ee8ece30b6df","core-js/modules/web.url.to-json.js":"6357c5a053a36e38c0e24243e550dd86","core-js/modules/web.url-search-params.js":"2494aebefd4ca447de0ef4cfdd47509e","./model.js":"aabf248f40f7693ef84a0cb99f385d1f","./views/recipeView":"bcae1aced0301b01ccacb3e6f7dfede8","lodash":"5b51af4f8ee9a053df33d524040c62ef","./views/searchView":"c5d792f7cac03ef65de30cc0fbb2cae7","./views/resultsView":"eacdbc0d50ee3d2819f3ee59366c2773","csso":"11e574ef63497f66b35e33ba2858aa6a","./views/paginationView":"d2063f3e7de2e4cdacfcb5eb6479db05","./views/bookmarksView":"7ed9311e216aa789713f70ebeec3ed40"}],"140df4f8e97a45c53c66fead1f5a9e92":[function(require,module,exports) {
 var $ = require('../internals/export');
 
 var global = require('../internals/global');
@@ -33602,73 +33594,6 @@ class bookmarksView extends _View.default {
 var _default = new bookmarksView();
 
 exports.default = _default;
-},{"url:../../img/icons.svg":"0d90ce0a2582e1dc87594ed095e724bc","./View":"61b7a1b097e16436be3d54c2f1828c73","./previewView":"e4d6583325a8b6c9380670c4f233bf07"}],"4dd83c2a08c1751220d223c54dc70016":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
-var _View = _interopRequireDefault(require("./View"));
-
-var _icons = _interopRequireDefault(require("url:../../img/icons.svg"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-class addRecipeView extends _View.default {
-  constructor() {
-    super();
-
-    _defineProperty(this, "_parentElement", document.querySelector('.upload'));
-
-    _defineProperty(this, "_window", document.querySelector('.add-recipe-window'));
-
-    _defineProperty(this, "_overlay", document.querySelector('.overlay'));
-
-    _defineProperty(this, "_btnOpen", document.querySelector('.nav__btn--add-recipe'));
-
-    _defineProperty(this, "_btnClose", document.querySelector('.btn--close-modal'));
-
-    this._addHandlerShowWindow();
-
-    this._addHandlerHideWindow();
-  }
-
-  toggleWindow() {
-    this._overlay.classList.toggle('hidden');
-
-    this._window.classList.toggle('hidden');
-  }
-
-  _addHandlerShowWindow() {
-    this._btnOpen.addEventListener('click', this.toggleWindow.bind(this));
-  }
-
-  _addHandlerHideWindow() {
-    this._btnClose.addEventListener('click', this.toggleWindow.bind(this));
-
-    this._overlay.addEventListener('click', this.toggleWindow.bind(this));
-  }
-
-  addHandlerUpload(handler) {
-    this._parentElement.addEventListener('submit', function (e) {
-      e.preventDefault();
-      const dataArr = [...new FormData(this)];
-      const data = Object.fromEntries(dataArr);
-      handler(data);
-    });
-  }
-
-  _generateMarkup() {}
-
-}
-
-var _default = new addRecipeView();
-
-exports.default = _default;
-},{"./View":"61b7a1b097e16436be3d54c2f1828c73","url:../../img/icons.svg":"0d90ce0a2582e1dc87594ed095e724bc"}]},{},["9cda1da842e8014edc6a229d919850e6","f11e5965d84b573f6d84880dff90042e","175e469a7ea7db1c8c0744d04372621f"], null)
+},{"url:../../img/icons.svg":"0d90ce0a2582e1dc87594ed095e724bc","./View":"61b7a1b097e16436be3d54c2f1828c73","./previewView":"e4d6583325a8b6c9380670c4f233bf07"}]},{},["9cda1da842e8014edc6a229d919850e6","f11e5965d84b573f6d84880dff90042e","175e469a7ea7db1c8c0744d04372621f"], null)
 
 //# sourceMappingURL=controller.568a6a5b.js.map
